@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <style>
+        #banner-kotak{
+          background-color: lightseagreen;
+          width: auto;
+          height: 1500px;
+          padding: 40px;
+          padding-top: 75px;}
+        .kotak{
+          background-color: oldlace;
+          width: 400px;
+          height: 400px;
+          padding-top: 60px;
+          padding-left: 20px;
+          padding-right: 20px;
+          margin: 20px;
+          margin-left: 175px;
+          margin-bottom: 50px;
+          float: left;}
+        .dropdown-item{
+          color:lightseagreen;}
+        .bgImgCenter{
+          background-image: url('/static/1.JPG');
+          background-repeat: no-repeat;
+          background-position: center; 
+          position: relative;
+          width:"80%";}
+        .strokeme{
+          color: #173543;
+          text-shadow:
+          -1px -1px 0 oldlace,
+          1px -1px 0 oldlace,
+          -1px 1px 0 oldlace,
+          1px 1px 0 oldlace;}
+    </style>
+</head>
+<body class= "background">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #173543 !important;">
+      
+        <a class="navbar-brand" href="/">
+          <img src="/static/2.JPG" width="80%">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('pie_fn')}}">Cluster Percentage</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cluster Map
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('scatt_fn') }}">World Map</a>
+                <a class="dropdown-item" href="{{ url_for('scatt_fn1') }}">USA Map</a>
+                <a class="dropdown-item" href="{{ url_for('scatt_fn2') }}">EU Map</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cluster Breakdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('bar_fn') }}">Cluster Count</a>
+                <a class="dropdown-item" href="{{ url_for('bar_fn1') }}">Funding Count</a>
+                <a class="dropdown-item" href="{{ url_for('bar_fn2') }}">Total Funding Average</a>
+              </div>
+              <li class="nav-item">
+                <a class="nav-link active" href="/predict" style="color: lightseagreen !important;">Predict <span class="sr-only">(current)</span></a>
+              </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron" style="background-color: lightseagreen; color: oldlace; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+      <h1 class="display-4">Startup Clustering and Benchmarking</h1>
+      <p>Startup with a following characteristic : </p>
+      <ul>
+        <li>Average funding of : {{AvgFund}} USD</li>
+        <li>{{FundCount}} times funding</li>
+        <li>funding used : {{FundType}} </li>
+      </ul>
+      <hr class="my-4">
+      <center>
+        <div style="background-color: oldlace; color: #173543; padding-bottom: 20px; padding-top: 20px;">
+        <p class="lead"> is clustered as : </p>
+        <h1 class="display-4"> {{prediction}} </h1>
+        </div>
+      </center>
+      <hr class="my-4">
+      <p class="lead">{{prediction}} has a characteristic of:</p>
+      <ul>
+        <li>Range of Average Fund : from {{mini}} USD to {{maxi}} USD</li>
+        <li>with an Average of : {{meani}} USD</li>
+      </ul>
+      <center>
+        <a href="/predict" target="_self">
+          <button type="submit" style="background-color: #173543; color: oldlace"
+          class="btn btn-info">Analyze Again</button>
+      </a>
+      </center>
+    </div>
+    <div class = "bgImgCenter">
+      <div class = "strokeme">
+      <center><h1> Cluster Short Description </h1></center>
+      </div>
+    </div>
+
+    <div id="banner-kotak">
+      <div class="kotak">
+          <h3>Angel Startup</h3>
+          <ul>
+              <li>Took several funding mostly on Angel and some venture funding</li>
+              <li>Second lowest fund count</li>
+              <li>The lowest in term of average and maximum fund</li>
+          </ul>
+      </div>
+
+      <div class="kotak">
+          <h3>Big Startup</h3>
+          <ul>
+              <li>Mostly took series A and Venture funding</li>
+              <li>A minimum of 2 times funding and the highest average fund count</li>
+              <li>The highest in term of minimum funding and average funding</li>
+          </ul>
+      </div>
+
+      <div class="kotak">
+          <h3>Venture Startup</h3>
+          <ul>
+              <li>Mostly took funding in form of Venture funding</li>
+              <li>Below average fund count</li>
+              <li>Above average in term of average total fund and has the highest maximum total fund</li>
+          </ul>
+      </div>
+
+      <div class="kotak">
+          <h3>Early to Mid Startup</h3>
+          <ul>
+              <li>Majority took Series A and Series B</li>
+              <li>Above average fund count</li>
+              <li>Below average in average total fund</li>
+          </ul>
+      </div>
+
+      <div class="kotak">
+        <h3>Late Fund Startup</h3>
+        <ul>
+            <li>Took funding mostly on Series B, Series C, or other funding</li>
+            <li>Has the lowest average of fund count</li>
+            <li>Has the second highest average total fund</li>
+        </ul>
+    </div>
+
+    <div class="kotak">
+      <h3>Small Startup</h3>
+      <ul>
+          <li>Took funding mostly on Series A or Angel fund</li>
+          <li>2nd highest fund count </li>
+          <li>2nd lowest average total fund</li>
+      </ul>
+    </div>
+</body>
+</html>

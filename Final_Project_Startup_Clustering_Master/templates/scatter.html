@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div style="width: 1000px;height: 600px;margin: auto;">
+        <div class="chart" id="plot" style="height: 100%;">
+            <script>
+                var graphs = {{plot | safe}};
+                Plotly.plot('plot',graphs,{});
+            </script>
+        </div>
+    </div>
+    <div class = "bgImgCenter">
+        <div class = "strokeme">
+        <center><h1> Cluster Short Description </h1></center>
+        </div>
+      </div>
+
+      <div id="banner-kotak">
+        <div class="kotak">
+            <h3>Angel Startup</h3>
+            <ul>
+                <li>Took several funding mostly on Angel and some venture funding</li>
+                <li>Second lowest fund count</li>
+                <li>The lowest in term of average and maximum fund</li>
+            </ul>
+        </div>
+
+        <div class="kotak">
+            <h3>Big Startup</h3>
+            <ul>
+                <li>Mostly took series A and Venture funding</li>
+                <li>A minimum of 2 times funding and the highest average fund count</li>
+                <li>The highest in term of minimum funding and average funding</li>
+            </ul>
+        </div>
+
+        <div class="kotak">
+            <h3>Venture Startup</h3>
+            <ul>
+                <li>Mostly took funding in form of Venture funding</li>
+                <li>Below average fund count</li>
+                <li>Above average in term of average total fund and has the highest maximum total fund</li>
+            </ul>
+        </div>
+
+        <div class="kotak">
+            <h3>Early to Mid Startup</h3>
+            <ul>
+                <li>Majority took Series A and Series B</li>
+                <li>Above average fund count</li>
+                <li>Below average in average total fund</li>
+            </ul>
+        </div>
+
+        <div class="kotak">
+          <h3>Late Fund Startup</h3>
+          <ul>
+              <li>Took funding mostly on Series B, Series C, or other funding</li>
+              <li>Has the lowest average of fund count</li>
+              <li>Has the second highest average total fund</li>
+          </ul>
+      </div>
+
+      <div class="kotak">
+        <h3>Small Startup</h3>
+        <ul>
+            <li>Took funding mostly on Series A or Angel fund</li>
+            <li>2nd highest fund count </li>
+            <li>2nd lowest average total fund</li>
+        </ul>
+    </div>
+{% endblock  %}
